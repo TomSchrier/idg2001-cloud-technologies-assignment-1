@@ -1,0 +1,27 @@
+{
+  "name": "idg2001-cloud-technologies-assignment-1",
+  "version": "1.0.0",
+  "description": "assignment-1",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.11.19"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TomSchrier/idg2001-cloud-technologies-assignment-1.git"
+  },
+  "keywords": [
+    "cloud"
+  ],
+  "author": "Tom Schrier, Ingunn Hatlehol Andreassen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TomSchrier/idg2001-cloud-technologies-assignment-1/issues"
+  },
+  "homepage": "https://github.com/TomSchrier/idg2001-cloud-technologies-assignment-1#readme"
+}
