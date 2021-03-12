@@ -7,7 +7,7 @@ const CustomerSchema = new mongoose.Schema({
     account_number: Number,
     first_name: String,
     last_name: String,
-    date_of_birth: Number,
+    date_of_birth: Date,
     city: String,
     created_date: { type: Date, default: Date.now }
 });

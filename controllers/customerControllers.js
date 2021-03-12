@@ -1,36 +1,32 @@
 //import customer model
 const Customer = require('../models/customerModel');
 
-// createNewcustomer function for post /customer route
-/*const createNewCustomer = (req, res) => {
-    res.json({ message: "POST createNewcustomer" }); // dummy function for now
-};*/
+//return the home page
+const getHomePage = (req, res) => {
+    //https://stackoverflow.com/a/47276129/14447555
+    res.sendFile('index.html', { root: '.' })
+};
 
 //POST create new customer
 const createNewCustomer = (req, res) => {
 
     const newCustomer = new Customer({
-        id: req.query.id,
-        personal_number: req.query.personal_number,
-        account_number: req.query.account_number,
-        first_name: req.query.first_name,
-        last_name: req.query.last_name,
-        date_of_birth: req.query.date_of_birth,
-        city: req.query.city
+        id: req.body.id,
+        personal_number: req.body.personal_number,
+        account_number: req.body.account_number,
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        date_of_birth: req.body.date_of_birth,
+        city: req.body.city
     });
 
     newCustomer
         .save()
-        .then(() => res.status(200).json(`–SUCCESS: User ${req.query.first_name} is now saved to the database.`))
-        .catch((error) => res.status(500).json(`–ERROR: There was an error adding the user ${req.query.first_name} to the database.`));
+        .then(() => res.status(200).json(`–SUCCESS: User ${req.body.first_name} is now saved to the database.`))
+        .catch((error) => res.status(500).json(`–ERROR: There was an error adding the user ${req.body.first_name} to the database.`));
 };
 
 //GET get customer by personal number
-/*
-const getCustomerByPersonalNumber = (req, res) => {
-    res.json({ message: "GET getCustomer" });
-}*/
-
 const getCustomerByPersonalNumber = (req, res) => {
     let personalNumberToFind = parseInt(req.query.personal_number);
 
@@ -42,11 +38,7 @@ const getCustomerByPersonalNumber = (req, res) => {
     };
 };
 
-/*
-const deleteCustomerByPersonalNumber = (req, res) => {
-    res.json({ message: "DELETE customer" });
-};*/
-
+//GET get customer by personal number
 const deleteCustomerByPersonalNumber = (req, res) => {
     let personalNumberToDelete = parseInt(req.query.personal_number);
 
@@ -59,11 +51,7 @@ const deleteCustomerByPersonalNumber = (req, res) => {
     }
 };
 
-/*
-const updateCustomerDetails = (req, res) => {
-    res.json({ message: "UPDATE UpdateCustomerDetails" });
-};*/
-
+//PATCH update a customer by entering their id
 const updateCustomerDetails = (req, res) => {
     let id = req.query.id;
     let newAccountNumber = parseInt(req.query.account_number);
@@ -98,7 +86,8 @@ const updateCustomerDetails = (req, res) => {
 //export functions so we can import it to our routes/customerRoutes.js
 module.exports = {
     createNewCustomer,
-    getCustomerByPersonalNumber,
     deleteCustomerByPersonalNumber,
+    getCustomerByPersonalNumber,
+    getHomePage,
     updateCustomerDetails
 };

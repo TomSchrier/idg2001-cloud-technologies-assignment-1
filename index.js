@@ -7,8 +7,6 @@ var bodyParser = require('body-parser');
 app.use(express.json()); // parses incoming requests with JSON payloads
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
-
 app.use('/', routes); //to use the imported routes
 
 mongoose.connect(
@@ -19,7 +17,6 @@ mongoose.connect(
         console.log("MongoDB Connection -- Ready state is:", mongoose.connection.readyState);
     }
 );
-
 
 const listener = app.listen(process.env.PORT || 3000, () => {
     console.log('App is listening on port ' + listener.address().port)
