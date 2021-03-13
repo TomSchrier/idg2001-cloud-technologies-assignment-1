@@ -3,11 +3,14 @@ const app = express();
 const routes = require('./routes/customerRoutes'); // import the routes
 const mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+var path = require('path');
 
 app.use(express.json()); // parses incoming requests with JSON payloads
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes); //to use the imported routes
+
 
 mongoose.connect(
     'mongodb+srv://tomschr:Cidc6riccj5vinT@cluster0.krk93.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',

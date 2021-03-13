@@ -4,7 +4,7 @@ const Customer = require('../models/customerModel');
 //return the home page
 const getHomePage = (req, res) => {
     //https://stackoverflow.com/a/47276129/14447555
-    res.sendFile('index.html', { root: '.' })
+    res.sendFile('public/index.html', { root: '.' })
 };
 
 //POST create new customer
@@ -30,15 +30,16 @@ const createNewCustomer = (req, res) => {
 const getCustomerByPersonalNumber = (req, res) => {
     let personalNumberToFind = parseInt(req.query.personal_number);
 
-    if (personalNumberToFind) {
-        //find by personal_number
+    if (!personalNumberToFind) {
+        res.status(400).json("You need to specify a personal number in the query")
+    } else {
         Customer.find({ personal_number: personalNumberToFind })
             .then(customers => { res.status(200).json(customers) })
             .catch((error) => { res.status(500).json(error) });
     };
 };
 
-//GET get customer by personal number
+//DELET customer by personal number
 const deleteCustomerByPersonalNumber = (req, res) => {
     let personalNumberToDelete = parseInt(req.query.personal_number);
 

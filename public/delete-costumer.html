@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="public/style.css">
+    <title>ABC Bank</title>
+</head> 
+<body>
+    <header>
+        <h1><b id="logo-abc">ABC</b> Bank</h1>
+       <nav>
+            <a href="index.html" >Search Costumer</a>
+            <a href="create-costumer.html">Create Costumer</a>
+            <a href="update-costumer.html">Update Cosumter</a>
+            <a href="#">Delete Costumer</a>
+        </nav>
+    </header>
+
+    <fieldset>
+        <legend>Delete costumer</legend>
+        <form action="/customer" method="POST">
+            <label for="personal_number">Personal Number:</label>
+            <input type="number" id="personal_number" name="personal_number" placeholder="" required>
+            <br>
+            <input type="submit" value="Delete costumer">
+        </form>
+    </fieldset>
+
+
+</body>
+</html> 
