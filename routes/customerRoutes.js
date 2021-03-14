@@ -7,15 +7,11 @@ const router  = express.Router();
 const customerController = require('../controllers/customerControllers.js'); 
 
 // Create routes with the controller function as the callback to handle the request
-
-//https://www.digitalocean.com/community/tutorials/use-expressjs-to-deliver-html-files
-router.get('/', customerController.getHomePage);
-
 router.post('/newcustomer', customerController.createNewCustomer); 
 
-router.get('/customer', customerController.getCustomerByPersonalNumber);
+router.get('/getcustomer', customerController.getCustomerByPersonalNumber);
 
-router.patch('/customer', customerController.updateCustomerDetails);
+router.patch('/updatecustomer', customerController.updateCustomerDetails);
 
 router.delete('/deletecustomer', customerController.deleteCustomerByPersonalNumber);
 

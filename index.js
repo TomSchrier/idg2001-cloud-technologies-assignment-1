@@ -8,8 +8,8 @@ var path = require('path');
 app.use(express.json()); // parses incoming requests with JSON payloads
 app.use(bodyParser.urlencoded({ extended: true }));
 
-//https://stackoverflow.com/q/41396881/14447555
-app.use(express.static(path.join(__dirname, 'public')));
+// Use static server to serve the Express Yourself Website
+app.use(express.static('public'));
 app.use('/', routes); //to use the imported routes
 //4VaxGGRv
 mongoose.connect(

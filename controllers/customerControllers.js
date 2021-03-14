@@ -1,12 +1,6 @@
 //import customer model
 const Customer = require('../models/customerModel');
 
-//return the home page
-const getHomePage = (req, res) => {
-    //https://stackoverflow.com/a/47276129/14447555
-    res.sendFile('public/index.html', { root: '.' })
-};
-
 //POST create new customer
 const createNewCustomer = (req, res) => {
 
@@ -70,7 +64,7 @@ const updateCustomerDetails = (req, res) => {
                 .catch((error) => res.status(500).json(error));
         };
 
-        /*if (newPlace) {
+        if (newPlace) {
             Student.findOneAndUpdate({ userName: userNameToFind }, { place: newPlace })
                 .then(() => res.status(200).json(`The place of ${userNameToFind} was updated to ${newPlace}`))
                 .catch((error) => res.status(500).json(error));
@@ -80,7 +74,7 @@ const updateCustomerDetails = (req, res) => {
             Student.findOneAndUpdate({ userName: userNameToFind }, { userName: newUserName })
                 .then(() => res.status(200).json(`The name of ${userNameToFind} was updated to ${newUserName}`))
                 .catch((error) => res.status(500).json(error));
-        }; */
+        };
     };
 };
 
@@ -89,6 +83,5 @@ module.exports = {
     createNewCustomer,
     deleteCustomerByPersonalNumber,
     getCustomerByPersonalNumber,
-    getHomePage,
     updateCustomerDetails
 };

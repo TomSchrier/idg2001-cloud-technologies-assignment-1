@@ -22,18 +22,13 @@
 
     <fieldset>
         <legend>Search for costumer</legend>
-        <form action="/customer" method="POST">
+        <form action="/getcustomer" method="GET">
             <label for="personal_number">Personal Number:</label>
             <input type="text" id="personal_number" name="personal_number" placeholder="Personal Number" pattern="^\d{11}$" title="Personal Number must consists of 11 digits." required>
             <br>
             <input type="submit" value="Search for costumer">
         </form>
     </fieldset>
-
-    <!--Ideen her er at du skal kunne søke på personal number. Om det finnes i databasen får man opp 2 knapper. en som sender til update siden,
-    og en som sender til delete siden der du bekrefter personal number for å slette fra databasen. 
-    Om kunden ikke finnes, får du opp en beskjed om at den ikke finnes, og en knapp som sender deg til create costumer-->
-
 </body>
 
 </html>
