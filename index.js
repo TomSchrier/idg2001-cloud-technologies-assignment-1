@@ -8,10 +8,10 @@ var path = require('path');
 app.use(express.json()); // parses incoming requests with JSON payloads
 app.use(bodyParser.urlencoded({ extended: true }));
 
+//https://stackoverflow.com/q/41396881/14447555
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes); //to use the imported routes
-
-
+//4VaxGGRv
 mongoose.connect(
     'mongodb+srv://tomschr:Cidc6riccj5vinT@cluster0.krk93.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
     { useFindAndModify: false, useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true},

@@ -13,7 +13,7 @@
     <header>
         <h1><b id="logo-abc">ABC</b> Bank</h1>
         <nav>
-                <a href="index.html">Search Costumer</a>
+                <a href="/">Search Costumer</a>
                 <a href="#">Create Costumer</a>
                 <a href="update-costumer.html">Update Cosumter</a>
                 <a href="delete-costumer.html">Delete Costumer</a>
@@ -21,15 +21,15 @@
     </header>
     <fieldset>
         <legend>Create new customer</legend>
-        <form action="/customer" method="POST">
+        <form action="/newcustomer" method="POST">
             <label for="id">ID:</label>
             <input type="number" id="id" name="id" placeholder="ID" required>
             <br>
             <label for="personal_number">Personal Number:</label>
-            <input type="number" id="personal_number" name="personal_number" placeholder="" required>
+            <input type="text" id="personal_number" name="personal_number" placeholder="Personal Number" pattern="^\d{11}$" title="Personal Number must consists of 11 digits." required>
             <br>
             <label for="account_number">Account Number:</label>
-            <input type="number" id="account_number" name="account_number" placeholder="Account Number" required>
+            <input type="text" id="account_number" name="account_number" placeholder="Account Number" pattern="^\d{11}$" title="Account Number must consists of 11 digits." required>
             <br>
             <label for="first_name">First Name:</label>
             <input type="text" id="first_name" name="first_name" required placeholder="First Name">
@@ -38,7 +38,7 @@
             <input type="text" id="last_name" name="last_name" required placeholder="Last Name">
             <br>
             <label for="date_of_birth">Date Of Birth:</label>
-            <input type="date" id="date_of_birth" name="date_of_birth" required placeholder="Date of Birth">
+            <input type="date" id="date_of_birth" name="date_of_birth" min="1900-01-01" max="2021-12-12" required placeholder="Date of Birth">
             <br>
             <label for="city">City:</label>
             <input type="text" id="city" name="city" required placeholder="City">

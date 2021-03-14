@@ -2,9 +2,9 @@ const mongoose = require("mongoose"); //import mongoose
 
 // customer schema
 const CustomerSchema = new mongoose.Schema({
-    id: Number,
-    personal_number: Number,
-    account_number: Number,
+    id: { type: Number, unique: true },
+    personal_number: { type: Number, unique: true },
+    account_number: { type: Number, unique: true },
     first_name: String,
     last_name: String,
     date_of_birth: Date,

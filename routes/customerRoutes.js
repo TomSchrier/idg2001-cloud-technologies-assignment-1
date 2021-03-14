@@ -11,13 +11,13 @@ const customerController = require('../controllers/customerControllers.js');
 //https://www.digitalocean.com/community/tutorials/use-expressjs-to-deliver-html-files
 router.get('/', customerController.getHomePage);
 
-router.post('/customer', customerController.createNewCustomer); 
+router.post('/newcustomer', customerController.createNewCustomer); 
 
 router.get('/customer', customerController.getCustomerByPersonalNumber);
 
 router.patch('/customer', customerController.updateCustomerDetails);
 
-router.delete('/customer', customerController.deleteCustomerByPersonalNumber);
+router.delete('/deletecustomer', customerController.deleteCustomerByPersonalNumber);
 
 // Export the route to use in index.js 
 module.exports = router; // export to use in server.js

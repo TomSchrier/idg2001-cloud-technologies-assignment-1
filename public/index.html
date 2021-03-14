@@ -24,7 +24,7 @@
         <legend>Search for costumer</legend>
         <form action="/customer" method="POST">
             <label for="personal_number">Personal Number:</label>
-            <input type="number" id="personal_number" name="personal_number" placeholder="" required>
+            <input type="text" id="personal_number" name="personal_number" placeholder="Personal Number" pattern="^\d{11}$" title="Personal Number must consists of 11 digits." required>
             <br>
             <input type="submit" value="Search for costumer">
         </form>
