@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./style.css" rel="stylesheet" type="text/css" />
+    <title>ABC Bank 🤑 – Delete</title>
+</head>
+
+<body>
+    <header>
+        <h1><b id="logo-abc">ABC</b> Bank</h1>
+        <nav>
+            <a href="/">Search Costumer</a>
+            <a href="/createcustomer">Create Costumer</a>
+            <a href="/updatecustomer">Update Cosumter</a>
+            <a href="#">Delete Costumer</a>
+        </nav>
+    </header>
+
+    <fieldset>
+        <legend>Delete costumer</legend>
+        <form action="/deletecustomer" method="POST">
+            <label for="personal_number">Personal Number:</label>
+            <input type="text" id="personal_number" name="personal_number"
+                placeholder="Enter the personal number of the customer to delete" pattern="^\d{11}$"
+                title="Personal Number must consists of 11 digits." required>
+            <input id="delete" type="submit" value="Delete costumer">
+        </form>
+    </fieldset>
+
+    <div class="results">
+        <% if (locals.response) { %>
+            <%= response %>
+                <% } %>
+    </div>
+
+
+</body>
+
+</html>

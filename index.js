@@ -5,16 +5,42 @@ const mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var path = require('path');
 
+app.set('view engine', 'ejs');
 app.use(express.json()); // parses incoming requests with JSON payloads
 app.use(bodyParser.urlencoded({ extended: true }));
+app.set("views", path.resolve(__dirname, "views"));
+app.use(express.static('public'));
 
 // Use static server to serve the Express Yourself Website
-app.use(express.static('public'));
+app.get(
+    '/',
+    (req, res) => {
+        res.render('index')
+    });
+
+app.get(
+    '/deletecustomer',
+    (req, res) => {
+        res.render('deletecustomer')
+    });
+
+app.get(
+    '/createcustomer',
+    (req, res) => {
+        res.render('createcustomer')
+    });
+
+app.get(
+    '/updatecustomer',
+    (req, res) => {
+        res.render('updatecustomer')
+    });
+
 app.use('/', routes); //to use the imported routes
 //4VaxGGRv
 mongoose.connect(
     'mongodb+srv://tomschr:Cidc6riccj5vinT@cluster0.krk93.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
-    { useFindAndModify: false, useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true},
+    { useFindAndModify: false, useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true },
     (err) => {
         if (err) return console.log("Error: ", err);
         console.log("MongoDB Connection -- Ready state is:", mongoose.connection.readyState);

@@ -7,7 +7,7 @@ const router  = express.Router();
 const customerController = require('../controllers/customerControllers.js'); 
 
 // Create routes with the controller function as the callback to handle the request
-router.post('/newcustomer', customerController.createNewCustomer); 
+router.post('/createcustomer', customerController.createNewCustomer); 
 
 router.get('/getcustomer', customerController.getCustomerByPersonalNumber);
 

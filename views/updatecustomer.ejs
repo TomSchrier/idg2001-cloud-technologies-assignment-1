@@ -13,10 +13,10 @@
     <header>
         <h1><b id="logo-abc">ABC</b> Bank</h1>
         <nav>
-            <a href="index.html">Search Costumer</a>
-            <a href="create-costumer.html">Create Costumer</a>
+            <a href="/">Search Costumer</a>
+            <a href="/createcustomer">Create Costumer</a>
             <a href="#">Update Cosumter</a>
-            <a href="delete-costumer.html">Delete Costumer</a>
+            <a href="/deletecustomer">Delete Costumer</a>
         </nav>
     </header>
 
@@ -24,29 +24,28 @@
         <legend>Update customer</legend>
         <form action="/updatecustomer" method="POST">
             <label for="personal_number">Personal Number:</label>
-            <input type="number" id="personal_number" name="personal_number" placeholder="Personal number of customer to update" required>
-            <br>
+            <input type="number" id="personal_number" name="personal_number"
+                placeholder="Personal number of customer to update" required>
             <label for="id">New ID:</label>
             <input type="number" id="id" name="id" placeholder="ID">
-            <br>
             <label for="account_number">New Account Number:</label>
             <input type="number" id="account_number" name="account_number" placeholder="Account Number">
-            <br>
             <label for="first_name">New First Name:</label>
             <input type="text" id="first_name" name="first_name" placeholder="First Name">
-            <br>
             <label for="last_name">New Last Name:</label>
             <input type="text" id="last_name" name="last_name" placeholder="Last Name">
-            <br>
             <label for="date_of_birth">New Date Of Birth:</label>
             <input type="date" id="date_of_birth" name="date_of_birth" placeholder="Date of Birth">
-            <br>
             <label for="city">New City:</label>
             <input type="text" id="city" name="city" placeholder="City">
-            <br>
             <input type="submit" value="Update Costumer">
         </form>
     </fieldset>
+    <div class="results">
+        <% if (locals.response) { %>
+            <%= response %>
+                <% } %>
+    </div>
 </body>
 
 </html>
