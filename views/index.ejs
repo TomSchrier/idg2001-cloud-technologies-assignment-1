@@ -13,20 +13,20 @@
     <header>
         <h1><b id="logo-abc">ABC</b> Bank</h1>
         <nav>
-            <a href="#">Search Costumer</a>
-            <a href="/createcustomer">Create Costumer</a>
+            <a href="#">Search customer</a>
+            <a href="/createcustomer">Create customer</a>
             <a href="/updatecustomer">Update Cosumter</a>
-            <a href="/deletecustomer">Delete Costumer</a>
+            <a href="/deletecustomer">Delete customer</a>
         </nav>
     </header>
 
     <fieldset>
-        <legend>Search for costumer</legend>
+        <legend>Search for customer</legend>
         <form action="/getcustomer" method="GET">
             <label for="personal_number">Personal Number:</label>
             <input type="text" id="personal_number" name="personal_number" placeholder="Personal Number"
                 pattern="^\d{11}$" title="Personal Number must consists of 11 digits" required>
-            <input type="submit" value="Search for costumer">
+            <input type="submit" value="Search for customer">
         </form>
     </fieldset>
     <div class="results">

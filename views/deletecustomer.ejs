@@ -13,21 +13,21 @@
     <header>
         <h1><b id="logo-abc">ABC</b> Bank</h1>
         <nav>
-            <a href="/">Search Costumer</a>
-            <a href="/createcustomer">Create Costumer</a>
+            <a href="/">Search customer</a>
+            <a href="/createcustomer">Create customer</a>
             <a href="/updatecustomer">Update Cosumter</a>
-            <a href="#">Delete Costumer</a>
+            <a href="#">Delete customer</a>
         </nav>
     </header>
 
     <fieldset>
-        <legend>Delete costumer</legend>
+        <legend>Delete customer</legend>
         <form action="/deletecustomer" method="POST">
             <label for="personal_number">Personal Number:</label>
             <input type="text" id="personal_number" name="personal_number"
                 placeholder="Enter the personal number of the customer to delete" pattern="^\d{11}$"
                 title="Personal Number must consists of 11 digits." required>
-            <input id="delete" type="submit" value="Delete costumer">
+            <input id="delete" type="submit" value="Delete customer">
         </form>
     </fieldset>
 
