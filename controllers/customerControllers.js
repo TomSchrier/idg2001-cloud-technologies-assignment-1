@@ -25,10 +25,10 @@ const getCustomerByPersonalNumber = (req, res) => {
     let personalNumberToFind = parseInt(req.query.personal_number);
 
     if (!personalNumberToFind) {
-        res.status(400).json("You need to specify a personal number in the query")
+        res.status(400).json("–ERROR: You need to specify a personal number in the query")
     } else {
         Customer.find({ personal_number: personalNumberToFind })
-            .then(customers => { 
+            .then(customers => {
                 if (customers.length === 0) {
                     res.status(200).send(`No customer with the personal number ${personalNumberToFind} was found in the`)
                 } else {
@@ -44,41 +44,63 @@ const deleteCustomerByPersonalNumber = (req, res) => {
     let personalNumberToDelete = parseInt(req.body.personal_number);
 
     if (!personalNumberToDelete) {
-        res.status(400).json("You need to specify a personal number in the body")
+        res.status(400).json("–ERROR: You need to specify a personal number in the body")
     } else {
         Customer.findOneAndDelete({ personal_number: personalNumberToDelete })
-            .then(() => res.status(200).json(`The customer with the personal number ${personalNumberToDelete} has been removed from the database`))
+            .then(() => res.status(200).json(`–SUCCESS: The customer with the personal number ${personalNumberToDelete} has been removed from the database`))
             .catch((error) => res.status(500).json(error));
     }
 };
 
 //PATCH update a customer by entering their id
 const updateCustomerDetails = (req, res) => {
-    let id = req.query.id;
-    let newAccountNumber = parseInt(req.query.account_number);
-    /*let newFirstName = req.query.first_name;
-    let newLastName = req.query.last_name;
-    let newDateOfBirth = req.query.date_of_birth;
-    let newCity = req.query.city;*/
+    let personalNumberToFilter = parseInt(req.body.personal_number);
 
-    if (!id) {
-        res.status(400).json("You need to provide a id");
+    let newId = parseInt(req.body.id);
+    let newAccountNumber = req.body.account_number;
+    let newFistName = req.body.first_name;
+    let newLastName = req.body.last_name;
+    let newDateOfBirth = req.body.date_of_birth;
+    let newCity = req.body.city;
+
+    //can be a loop
+    //only one item can be updated at a time
+    if (!personalNumberToFilter) {
+        res.status(400).json("–ERROR: You need to provide a personal number for the customer that needs to be updated.");
     } else {
+        if (newId) {
+            Customer.findOneAndUpdate({ personal_number: personalNumberToFilter }, { id: newId })
+                .then(() => res.status(200).json(`–SUCCESS: The ID of the customer with the personal number ${personalNumberToFilter} was updated to ${newId}`))
+                .catch((error) => res.status(500).json(error));
+        };
+
         if (newAccountNumber) {
-            Customer.findOneAndUpdate({ id: id }, { account_number: newAccountNumber })
-                .then(() => res.status(200).json(`The status of acc with the id ${id} was updated to ${newStatus}`))
+            Customer.findOneAndUpdate({ personal_number: personalNumberToFilter }, { account_number: newAccountNumber })
+                .then(() => res.status(200).json(`–SUCCESS: The account number of the customer with the personal number ${personalNumberToFilter} was updated to ${newAccountNumber}`))
                 .catch((error) => res.status(500).json(error));
         };
 
-        if (newPlace) {
-            Student.findOneAndUpdate({ userName: userNameToFind }, { place: newPlace })
-                .then(() => res.status(200).json(`The place of ${userNameToFind} was updated to ${newPlace}`))
+        if (newFistName) {
+            Customer.findOneAndUpdate({ personal_number: personalNumberToFilter }, { first_name: newFistName })
+                .then(() => res.status(200).json(`–SUCCESS: The first name of the customer with the personal number ${personalNumberToFilter} was updated to ${newFistName}`))
                 .catch((error) => res.status(500).json(error));
         };
 
-        if (newUserName) {
-            Student.findOneAndUpdate({ userName: userNameToFind }, { userName: newUserName })
-                .then(() => res.status(200).json(`The name of ${userNameToFind} was updated to ${newUserName}`))
+        if (newLastName) {
+            Customer.findOneAndUpdate({ personal_number: personalNumberToFilter }, { last_name: newLastName })
+                .then(() => res.status(200).json(`–SUCCESS: The last name of the customer with the personal number ${personalNumberToFilter} was updated to ${newLastName}`))
+                .catch((error) => res.status(500).json(error));
+        };
+
+        if (newDateOfBirth) {
+            Customer.findOneAndUpdate({ personal_number: personalNumberToFilter }, { date_of_birth: newDateOfBirth })
+                .then(() => res.status(200).json(`–SUCCESS: The date of birth of the customer with the personal number ${personalNumberToFilter} was updated to ${newDateOfBirth}`))
+                .catch((error) => res.status(500).json(error));
+        };
+
+        if (newCity) {
+            Customer.findOneAndUpdate({ personal_number: personalNumberToFilter }, { city: newCity })
+                .then(() => res.status(200).json(`–SUCCESS: The city of the customer with the personal number ${personalNumberToFilter} was updated to ${newCity}`))
                 .catch((error) => res.status(500).json(error));
         };
     };
