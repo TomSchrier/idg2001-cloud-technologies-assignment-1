@@ -17,7 +17,7 @@ const createNewCustomer = (req, res) => {
     newCustomer
         .save()
         .then(() => res.status(200).json(`–SUCCESS: User ${req.body.first_name} is now saved to the database.`))
-        .catch((error) => res.status(500).json(`–ERROR: There was an error adding the user ${req.body.first_name} to the database.`));
+        .catch((error) => res.status(500).json(`–ERROR: There was an error adding the user ${req.body.first_name} to the database. This might be because the user already is in the database.`));
 };
 
 //GET get customer by personal number
@@ -28,17 +28,23 @@ const getCustomerByPersonalNumber = (req, res) => {
         res.status(400).json("You need to specify a personal number in the query")
     } else {
         Customer.find({ personal_number: personalNumberToFind })
-            .then(customers => { res.status(200).json(customers) })
-            .catch((error) => { res.status(500).json(error) });
+            .then(customers => { 
+                if (customers.length === 0) {
+                    res.status(200).send(`No customer with the personal number ${personalNumberToFind} was found in the`)
+                } else {
+                    res.status(200).json(customers)
+                }
+            })
+            .catch((error) => { res.status(500).json(`–ERROR: ${error}.`) });
     };
 };
 
 //DELET customer by personal number
 const deleteCustomerByPersonalNumber = (req, res) => {
-    let personalNumberToDelete = parseInt(req.query.personal_number);
+    let personalNumberToDelete = parseInt(req.body.personal_number);
 
     if (!personalNumberToDelete) {
-        res.status(400).json("You need to specify a personal number in the query")
+        res.status(400).json("You need to specify a personal number in the body")
     } else {
         Customer.findOneAndDelete({ personal_number: personalNumberToDelete })
             .then(() => res.status(200).json(`The customer with the personal number ${personalNumberToDelete} has been removed from the database`))

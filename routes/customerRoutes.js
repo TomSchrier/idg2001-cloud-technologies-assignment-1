@@ -11,9 +11,9 @@ router.post('/newcustomer', customerController.createNewCustomer);
 
 router.get('/getcustomer', customerController.getCustomerByPersonalNumber);
 
-router.patch('/updatecustomer', customerController.updateCustomerDetails);
+router.post('/updatecustomer', customerController.updateCustomerDetails);
 
-router.delete('/deletecustomer', customerController.deleteCustomerByPersonalNumber);
+router.post('/deletecustomer', customerController.deleteCustomerByPersonalNumber);
 
 // Export the route to use in index.js 
 module.exports = router; // export to use in server.js
