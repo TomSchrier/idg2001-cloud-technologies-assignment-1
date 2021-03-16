@@ -31,8 +31,9 @@ const createNewCustomer = (req, res) => {
 
 //GET get customer by personal number
 const getCustomerByPersonalNumber = (req, res) => {
+    let started = Date.now()
     let personalNumberToFind = parseInt(req.query.personal_number);
-    let customerDoesNotExistString = `There are no customers with the personal number ${personalNumberToFind}. You can add the customer by visiting the "Create Customer" page.`;
+    let customerDoesNotExistString = `There are no customers with the personal number ${personalNumberToFind}. You can add the customer by visiting the "Create Customer" page. (FRONT END START: ${started}) BACK END RESULT:`;
 
     //use the .find method to return a customer from the databse if found
     Customer.find({ personal_number: personalNumberToFind })
