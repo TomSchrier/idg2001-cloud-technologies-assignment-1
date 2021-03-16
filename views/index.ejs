@@ -12,9 +12,9 @@
 
 <body>
     <header>
-        <h1><b id="logo-abc">ABC</b> Bank</h1>
+        <h1><b id="logo-abc">ABC</b> Bank LATENCY2</h1>
         <nav>
-            <a href="#">Search Customer</a>
+            <a href="/">Search Customer</a>
             <a href="/createcustomer">Create Customer</a>
             <a href="/updatecustomer">Update Customer</a>
             <a href="/deletecustomer">Delete Customer</a>
@@ -30,13 +30,19 @@
             <input type="submit" value="Search for customer">
         </form>
     </fieldset>
-    
-     <!-- We use ejs here to insert the response from the server on the HTL page -->
+
+    <!-- We use ejs here to insert the response from the server on the HTML page T3 -->
     <div class="results">
         <% if (locals.response) { %>
-            <%= response %>
-                <% } %>
+            <% let time=Date.now() %>
+                <%= response %>
+                    <%= time %>
+                        <% } %>
     </div>
+
+    <script>
+        
+    </script>
 </body>
 
 </html>
