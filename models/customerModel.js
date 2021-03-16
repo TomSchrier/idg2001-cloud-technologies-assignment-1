@@ -1,6 +1,13 @@
+/* 
+CUSTOMER MODEL
+
+This file contains the model for a customer, each new customer inserted 
+into the database must follow this Schema if it doesn't, it won't be inserted.
+*/
+
 const mongoose = require("mongoose"); //import mongoose
 
-// customer schema
+//customer schema
 const CustomerSchema = new mongoose.Schema({
     id: { type: Number, unique: true },
     personal_number: { type: Number, unique: true },

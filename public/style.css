@@ -23,7 +23,12 @@ legend {
 }
 
 form {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
     padding: 0 5%;
 }
@@ -36,18 +41,22 @@ input[type=submit] {
     width: 100%;
     padding: 1em 1.5em;
     margin: 1em 0;
+    -webkit-box-sizing: border-box;
     box-sizing: border-box;
     text-transform: uppercase;
 
 }
 
 input[type=submit]:hover {
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(61, 61, 61, 0.66);
     box-shadow: 0px 0px 5px 0px rgba(61, 61, 61, 0.66);
+    -webkit-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
     transition-duration: 0.3s;
     font-weight: bold;
 }
 
-#delete:hover  {
+#delete:hover {
     background-color: lightcoral;
     border: 1px solid darkred;
 }
@@ -70,5 +79,6 @@ nav a:hover {
     margin: auto;
     width: 40%;
     text-align: center;
+    -webkit-box-shadow: 0px 0px 8px 0px rgba(52, 52, 52, 0.5);
     box-shadow: 0px 0px 8px 0px rgba(52, 52, 52, 0.5);
 }
