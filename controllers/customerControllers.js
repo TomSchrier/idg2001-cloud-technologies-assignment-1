@@ -28,7 +28,7 @@ const createNewCustomer = async (req, res) => {
     await newCustomer
         .save()
         .then(console.log("–––BACK END DONE T4:"+Date.now()))
-        .then(() => res.status(200).render('createcustomer.ejs', { response: successfulResponseString}))
+        .then(() => res.status(200).render('createcustomer.ejs', { response: successfulResponseString+"–––BACK END DONE T4: ("+Date.now()+")"}))
         .catch((error) => res.status(500).render('createcustomer.ejs', { response: errorResponeString }));
 };
 
