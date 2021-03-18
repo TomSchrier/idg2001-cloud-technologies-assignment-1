@@ -8,7 +8,7 @@ const Customer = require('../models/customerModel');
 
 //POST create new customer
 const createNewCustomer = async (req, res) => {
-    console.log(`–––T1: ${Date.now()}`)
+    console.log(`–––SUBMITTED T1: ${Date.now()}`)
     let successfulResponseString = `SUCCESS: The customer ${req.body.first_name} has been added to the database`;
     let errorResponeString = `ERROR: The customer with the name ${req.body.first_name} can not be added to the database. This can be because a customer already exists with the ID, personal number, or account number provided.`
 
@@ -27,7 +27,7 @@ const createNewCustomer = async (req, res) => {
     console.log(`–––BACK END START T2: ${Date.now()}`)
     await newCustomer
         .save()
-        .then(() => res.status(200).render('createcustomer.ejs', { response: successfulResponseString+"T4: ("+Date.now()+")"}))
+        .then(() => res.status(200).render('createcustomer.ejs', { response: successfulResponseString+"–––BACK END DONE T4: ("+Date.now()+")"}))
         .catch((error) => res.status(500).render('createcustomer.ejs', { response: errorResponeString }));
 };
 
