@@ -47,8 +47,10 @@
     <!-- We use ejs here to insert the response from the server on the HTL page -->
     <div class="results">
         <% if (locals.response) { %>
-            <%= response %>
-                <% } %>
+            <% let time=Date.now() %>
+                <%= response %>
+                    <%= time %>
+                        <% } %>
     </div>
 </body>
 

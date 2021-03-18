@@ -7,7 +7,7 @@ This file contains the main logic of the application. There are functions define
 const Customer = require('../models/customerModel');
 
 //POST create new customer
-const createNewCustomer = (req, res) => {
+const createNewCustomer = async (req, res) => {
     let successfulResponseString = `SUCCESS: The customer ${req.body.first_name} has been added to the database.`;
     let errorResponeString = `ERROR: The customer with the name ${req.body.first_name} can not be added to the database. This can be because a customer already exists with the ID, personal number, or account number provided.`
 
@@ -23,7 +23,7 @@ const createNewCustomer = (req, res) => {
     });
 
     //use the .save method to save the new customer to the database
-    newCustomer
+    await newCustomer
         .save()
         .then(() => res.status(200).render('createcustomer.ejs', { response: successfulResponseString }))
         .catch((error) => res.status(500).render('createcustomer.ejs', { response: errorResponeString }));
@@ -31,7 +31,6 @@ const createNewCustomer = (req, res) => {
 
 //GET get customer by personal number
 const getCustomerByPersonalNumber = async (req, res) => {
-    let started = Date.now();
     let personalNumberToFind = req.query.personal_number;
     let customerDoesNotExistString = `(FRONT END START: ${started}) `;
 
@@ -40,7 +39,6 @@ const getCustomerByPersonalNumber = async (req, res) => {
     //use the .find method to return a customer from the databse if found
     await Customer.find({ personal_number: personalNumberToFind })
         .then(customers => {
-            let t4 = ` BACKEND DONE: (${Date.now().toString()}) `;
             if (customers.length === 0) {
                 res.status(200).render('index.ejs', { response: customerDoesNotExistString + t4 })
             } else {
@@ -63,8 +61,10 @@ const deleteCustomerByPersonalNumber = (req, res) => {
 };
 
 //PATCH update a customer by entering their ID
-const updateCustomerDetails = (req, res) => {
+const updateCustomerDetails = async (req, res) => {
     let responseString = `SUCCESS: The customer with the personal number ${req.body.personal_number} has been updated.`
+    let started = Date.now();
+    let FRONTENDSTART = `(FRONT END START: ${started}) `;
 
     //find a customer with a matching personal number (personalNumberToFilter)
     let personalNumberToFilter = parseInt(req.body.personal_number);
@@ -79,8 +79,9 @@ const updateCustomerDetails = (req, res) => {
     //This could be a loop
     //Currently only one item can be updated at the time
     if (newId) {
-        Customer.findOneAndUpdate({ personal_number: personalNumberToFilter }, { id: newId })
-            .then(() => res.status(200).render('updatecustomer.ejs', { response: responseString }))
+        let backstart = Date.now().toString();
+        await Customer.findOneAndUpdate({ personal_number: personalNumberToFilter }, { id: Date.now().toString() })
+            .then(() => res.status(200).render('updatecustomer.ejs', { response: FRONTENDSTART }))
             .catch((error) => res.status(500).json(error));
     };
 
