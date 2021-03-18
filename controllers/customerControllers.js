@@ -30,16 +30,19 @@ const createNewCustomer = (req, res) => {
 };
 
 //GET get customer by personal number
-const getCustomerByPersonalNumber = (req, res) => {
-    let started = Date.now()
-    let personalNumberToFind = parseInt(req.query.personal_number);
-    let customerDoesNotExistString = `There are no customers with the personal number ${personalNumberToFind}. You can add the customer by visiting the "Create Customer" page. (FRONT END START: ${started}) BACK END RESULT:`;
+const getCustomerByPersonalNumber = async (req, res) => {
+    let started = Date.now();
+    let personalNumberToFind = req.query.personal_number;
+    let customerDoesNotExistString = `(FRONT END START: ${started}) `;
 
+
+    
     //use the .find method to return a customer from the databse if found
-    Customer.find({ personal_number: personalNumberToFind })
+    await Customer.find({ personal_number: personalNumberToFind })
         .then(customers => {
+            let t4 = ` BACKEND DONE: (${Date.now().toString()}) `;
             if (customers.length === 0) {
-                res.status(200).render('index.ejs', { response: customerDoesNotExistString })
+                res.status(200).render('index.ejs', { response: customerDoesNotExistString + t4 })
             } else {
 
                 let customerToDisplay = `Customer found: ${customers[0].first_name} ${customers[0].last_name}. Their account number is: ${customers[0].account_number}`;
@@ -62,7 +65,7 @@ const deleteCustomerByPersonalNumber = (req, res) => {
 //PATCH update a customer by entering their ID
 const updateCustomerDetails = (req, res) => {
     let responseString = `SUCCESS: The customer with the personal number ${req.body.personal_number} has been updated.`
-    
+
     //find a customer with a matching personal number (personalNumberToFilter)
     let personalNumberToFilter = parseInt(req.body.personal_number);
 
