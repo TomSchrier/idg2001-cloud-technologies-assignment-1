@@ -25,14 +25,16 @@ const createNewCustomer = async (req, res) => {
     //use the .save method to save the new customer to the database
     await newCustomer
         .save()
+        .then(console.log(`BACK END START: ${Date.now().toString()}`))
         .then(() => res.status(200).render('createcustomer.ejs', { response: successfulResponseString }))
+        .then(console.log(`BACK END DONE: ${Date.now().toString()}`))
         .catch((error) => res.status(500).render('createcustomer.ejs', { response: errorResponeString }));
 };
 
 //GET get customer by personal number
 const getCustomerByPersonalNumber = async (req, res) => {
     let personalNumberToFind = req.query.personal_number;
-    let customerDoesNotExistString = `(FRONT END START: ${started}) `;
+    let customerDoesNotExistString = `customer does not exist`;
 
 
     
@@ -40,7 +42,7 @@ const getCustomerByPersonalNumber = async (req, res) => {
     await Customer.find({ personal_number: personalNumberToFind })
         .then(customers => {
             if (customers.length === 0) {
-                res.status(200).render('index.ejs', { response: customerDoesNotExistString + t4 })
+                res.status(200).render('index.ejs', { response: customerDoesNotExistString })
             } else {
 
                 let customerToDisplay = `Customer found: ${customers[0].first_name} ${customers[0].last_name}. Their account number is: ${customers[0].account_number}`;
@@ -63,9 +65,7 @@ const deleteCustomerByPersonalNumber = (req, res) => {
 //PATCH update a customer by entering their ID
 const updateCustomerDetails = async (req, res) => {
     let responseString = `SUCCESS: The customer with the personal number ${req.body.personal_number} has been updated.`
-    let started = Date.now();
-    let FRONTENDSTART = `(FRONT END START: ${started}) `;
-
+    
     //find a customer with a matching personal number (personalNumberToFilter)
     let personalNumberToFilter = parseInt(req.body.personal_number);
 
@@ -79,9 +79,8 @@ const updateCustomerDetails = async (req, res) => {
     //This could be a loop
     //Currently only one item can be updated at the time
     if (newId) {
-        let backstart = Date.now().toString();
-        await Customer.findOneAndUpdate({ personal_number: personalNumberToFilter }, { id: Date.now().toString() })
-            .then(() => res.status(200).render('updatecustomer.ejs', { response: FRONTENDSTART }))
+        await Customer.findOneAndUpdate({ personal_number: personalNumberToFilter }, { id: newId })
+            .then(() => res.status(200).render('updatecustomer.ejs', { response: responseString }))
             .catch((error) => res.status(500).json(error));
     };
 
