@@ -8,7 +8,7 @@ const Customer = require('../models/customerModel');
 
 //POST create new customer
 const createNewCustomer = async (req, res) => {
-    const { id, personal_number, account_number, first_name, last_name, date_of_birth, city } = req.body;
+    const { id, personal_number, first_name, last_name, date_of_birth, city } = req.body;
 
     let successfulResponseString = `SUCCESS: The customer ${first_name} has been added to the database.`;
     let errorResponeString = `ERROR: The customer with the name ${first_name} can not be added to the database. This can be because a customer already exists with the ID, personal number, or account number provided.`;
@@ -19,11 +19,13 @@ const createNewCustomer = async (req, res) => {
     if (alreadyInDatabase) {
         return res.status(200).render('createcustomer.ejs', { response: alreadyInDatabaseString })
     }
+
+    let RandomAccountNumber = Math.floor(Math.random() * (99999999999 - 10000000000 + 1) ) + 10000000000;
     //fill our model with the information the user has entered in the form
     const newCustomer = new Customer({
         id: id,
         personal_number: personal_number,
-        account_number: account_number,
+        account_number: RandomAccountNumber,
         first_name: first_name,
         last_name: last_name,
         date_of_birth: date_of_birth,
@@ -33,7 +35,7 @@ const createNewCustomer = async (req, res) => {
     //use the .save method to save the new customer to the database
     await newCustomer
         .save()
-        .then(() => res.status(200).render('createcustomer.ejs', { response: successfulResponseString }))
+        .then(() => res.status(200).render('createcustomer.ejs', { response: successfulResponseString+` Their acount number is ${RandomAccountNumber}` }))
         .catch((error) => res.status(500).render('createcustomer.ejs', { response: errorResponeString }));
 };
 
