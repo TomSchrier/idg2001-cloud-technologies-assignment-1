@@ -8,7 +8,7 @@ const Customer = require('../models/customerModel');
 
 //POST create new customer
 const createNewCustomer = async (req, res) => {
-    const {id, personal_number, account_number, first_name, last_name, date_of_birth, city} = req.body;
+    const { id, personal_number, account_number, first_name, last_name, date_of_birth, city } = req.body;
 
     let successfulResponseString = `SUCCESS: The customer ${first_name} has been added to the database.`;
     let errorResponeString = `ERROR: The customer with the name ${first_name} can not be added to the database. This can be because a customer already exists with the ID, personal number, or account number provided.`;
@@ -59,17 +59,24 @@ const getCustomerByPersonalNumber = async (req, res) => {
 //DELETE a customer by their personal number
 const deleteCustomerByPersonalNumber = async (req, res) => {
     let responseString = `SUCCESS: The customer with the personal number ${req.body.personal_number} has been deleted from the database.`
+    let notInDatabaseString = `ERROR: The customer with the personal number ${req.body.personal_number} can not be deleted. Their personal number was not found in the database.`
 
-    //use the .findOneAndDelete method to find a customer in the database, and then delete the customer if found
-    await Customer.findOneAndDelete({ personal_number: req.body.personal_number })
-        .then(() => res.status(200).render('deletecustomer.ejs', { response: responseString }))
-        .catch((error) => res.status(500).json(error))
+    let alreadyInDatabase = await Customer.findOne({ personal_number: req.body.personal_number });
+
+    if (alreadyInDatabase) {
+        //use the .findOneAndDelete method to find a customer in the database, and then delete the customer if found
+        await Customer.findOneAndDelete({ personal_number: req.body.personal_number })
+            .then(() => res.status(200).render('deletecustomer.ejs', { response: responseString }))
+            .catch((error) => res.status(500).json(error))
+    } else {
+        return res.status(400).render('deletecustomer.ejs', { response: notInDatabaseString })
+    }
 };
 
 //PATCH update a customer by entering their ID
 const updateCustomerDetails = async (req, res) => {
     let responseString = `SUCCESS: The customer with the personal number ${req.body.personal_number} has been updated.`;
-    
+
     //find a customer with a matching personal number (personalNumberToFilter)
     let personalNumberToFilter = req.body.personal_number;
 
