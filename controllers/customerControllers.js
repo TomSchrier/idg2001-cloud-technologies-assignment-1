@@ -79,6 +79,7 @@ const updateCustomerDetails = async (req, res) => {
     let newLastName = req.body.last_name;
     let newDateOfBirth = req.body.date_of_birth;
     let newCity = req.body.city;
+    let updateDate = Date.now();
 
     //This could be a loop
     //Currently only one item can be updated at the time
@@ -116,6 +117,10 @@ const updateCustomerDetails = async (req, res) => {
         await Customer.findOneAndUpdate({ personal_number: personalNumberToFilter }, { city: newCity })
             .then(() => res.status(200).render('updatecustomer.ejs', { response: responseString }))
             .catch((error) => res.status(500).json(error));
+    };
+
+    if (updateDate) {
+        await Customer.findOneAndUpdate({ personal_number: personalNumberToFilter }, { updated_date: updateDate })
     };
 };
 

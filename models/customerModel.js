@@ -16,7 +16,8 @@ const CustomerSchema = new mongoose.Schema({
     last_name: String,
     date_of_birth: Date,
     city: String,
-    created_date: { type: Date, default: Date.now }
+    created_date: { type: Date, default: Date.now },
+    updated_date: Date
 });
 
 const Customer = mongoose.model('Customer', CustomerSchema); //convert to model named Customer
