@@ -83,10 +83,8 @@ const updateCustomerDetails = async (req, res) => {
     let personalNumberToFilter = req.body.personal_number;
 
     let newId = req.body.id;
-    let newAccountNumber = req.body.account_number;
     let newFistName = req.body.first_name;
     let newLastName = req.body.last_name;
-    let newDateOfBirth = req.body.date_of_birth;
     let newCity = req.body.city;
     let updateDate = Date.now();
 
@@ -94,12 +92,6 @@ const updateCustomerDetails = async (req, res) => {
     //Currently only one item can be updated at the time
     if (newId) {
         await Customer.findOneAndUpdate({ personal_number: personalNumberToFilter }, { id: newId })
-            .then(() => res.status(200).render('updatecustomer.ejs', { response: responseString }))
-            .catch((error) => res.status(500).json(error));
-    };
-
-    if (newAccountNumber) {
-        await Customer.findOneAndUpdate({ personal_number: personalNumberToFilter }, { account_number: newAccountNumber })
             .then(() => res.status(200).render('updatecustomer.ejs', { response: responseString }))
             .catch((error) => res.status(500).json(error));
     };
@@ -112,12 +104,6 @@ const updateCustomerDetails = async (req, res) => {
 
     if (newLastName) {
         await Customer.findOneAndUpdate({ personal_number: personalNumberToFilter }, { last_name: newLastName })
-            .then(() => res.status(200).render('updatecustomer.ejs', { response: responseString }))
-            .catch((error) => res.status(500).json(error));
-    };
-
-    if (newDateOfBirth) {
-        await Customer.findOneAndUpdate({ personal_number: personalNumberToFilter }, { date_of_birth: newDateOfBirth })
             .then(() => res.status(200).render('updatecustomer.ejs', { response: responseString }))
             .catch((error) => res.status(500).json(error));
     };
