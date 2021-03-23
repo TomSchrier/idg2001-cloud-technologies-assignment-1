@@ -8,7 +8,7 @@ const Customer = require('../models/customerModel');
 
 //POST create new customer
 const createNewCustomer = async (req, res) => {
-    const { personal_number, first_name, last_name, date_of_birth, city } = req.body;
+    const { id, personal_number, first_name, last_name, date_of_birth, city } = req.body;
 
     let successfulResponseString = `SUCCESS: The customer ${first_name} has been added to the database.`;
     let errorResponeString = `ERROR: The customer with the name ${first_name} can not be added to the database. This can be because a customer already exists with the ID, personal number, or account number provided.`;
@@ -23,6 +23,7 @@ const createNewCustomer = async (req, res) => {
     let RandomAccountNumber = Math.floor(Math.random() * (99999999999 - 10000000000 + 1) ) + 10000000000;
     //fill our model with the information the user has entered in the form
     const newCustomer = new Customer({
+        id: id,
         personal_number: personal_number,
         account_number: RandomAccountNumber,
         first_name: first_name,
@@ -81,6 +82,7 @@ const updateCustomerDetails = async (req, res) => {
     //find a customer with a matching personal number (personalNumberToFilter)
     let personalNumberToFilter = req.body.personal_number;
 
+    let newId = req.body.id;
     let newFistName = req.body.first_name;
     let newLastName = req.body.last_name;
     let newCity = req.body.city;
@@ -88,6 +90,12 @@ const updateCustomerDetails = async (req, res) => {
 
     //This could be a loop
     //Currently only one item can be updated at the time
+    if (newId) {
+        await Customer.findOneAndUpdate({ personal_number: personalNumberToFilter }, { id: newId })
+            .then(() => res.status(200).render('updatecustomer.ejs', { response: responseString }))
+            .catch((error) => res.status(500).json(error));
+    };
+
     if (newFistName) {
         await Customer.findOneAndUpdate({ personal_number: personalNumberToFilter }, { first_name: newFistName })
             .then(() => res.status(200).render('updatecustomer.ejs', { response: responseString }))
