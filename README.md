@@ -2,6 +2,14 @@
 
 Tom Schrier and Ingunn Hatlehol Andreassen
 
+**changelog for second delivery:**
+- birthdays can not be set in the future
+- added a "time updated" when a customer is updated
+- It is not possible to delete a customer that is not found in the database
+- Account numbers are now generated randomly when a new user is added to the database
+
+**NOTE: the latency folder is unchanged and the database is updated with new documents (screenshot in the delivery folder)**
+
 ## The file structure
 We decided to start from scratch and use the provided code as inspiration rather than building on top of it. We are using a 'Model–view–controller' approach where the code is divided up into different files across different folders.
 
