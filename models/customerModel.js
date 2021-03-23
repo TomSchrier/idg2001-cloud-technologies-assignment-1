@@ -13,7 +13,7 @@ const CustomerSchema = new mongoose.Schema({
     account_number: { type: Number, unique: true, required: true },
     first_name: { type: String, trim: true },
     last_name: { type: String, trim: true },
-    date_of_birth: Date,
+    date_of_birth: {type: Date, min: '1900-01-01', max: Date.now },
     city: { type: String, uppercase: true, trim: true },
     created_date: { type: Date, default: Date.now },
     updated_date: Date

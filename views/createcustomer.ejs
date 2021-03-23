@@ -31,7 +31,7 @@
             <label for="last_name">Last Name:</label>
             <input type="text" id="last_name" name="last_name" required placeholder="Last Name">
             <label for="date_of_birth">Date Of Birth:</label>
-            <input type="date" id="date_of_birth" name="date_of_birth" min="1900-01-01" max="2021-12-12" required
+            <input type="date" id="date_of_birth" name="date_of_birth" min="1900-01-01" max=<%- new Date().getFullYear(); %>required
                 placeholder="Date of Birth">
             <label for="city">City:</label>
             <input type="text" id="city" name="city" required placeholder="City">
